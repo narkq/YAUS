@@ -25,7 +25,6 @@ zend_module_entry yaus_module_entry = {
 
 PHP_MINIT_FUNCTION(yaus)
 {
-	stem_en_init();
 	stem_ru_init();
 	return SUCCESS;
 }
