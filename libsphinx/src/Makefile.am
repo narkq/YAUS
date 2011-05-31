@@ -9,7 +9,7 @@ libsphinx_a_SOURCES = $(SRC_SPHINX)
 bin_PROGRAMS = stemword
 #noinst_PROGRAMS = tests
 
-stemword_SOURCES = indexer.cpp
+stemword_SOURCES = stemword.cpp
 #tests_SOURCES = tests.cpp
 
 BUILT_SOURCES = extract-version
