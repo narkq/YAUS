@@ -29,7 +29,7 @@ $words = array(
 	'сталеварами',
 );
 
-$syscall_path = '../bloat/src/bloat';
+$syscall_path = './libsphinx/src/stemword';
 foreach ($words as $word)
 {
 	$right = substr(`$syscall_path $word`, 0, -1);
