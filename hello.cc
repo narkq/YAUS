@@ -1,43 +1,44 @@
-#include "php_hello.h"
+#include "php_yaus.h"
 #include "sphinxstem.h"
 
-static function_entry hello_functions[] = {
-    PHP_FE(hello_world, NULL)
+static function_entry yaus_functions[] = {
+    PHP_FE(stemword_ru_cp1251, NULL)
     {NULL, NULL, NULL}
 };
 
-zend_module_entry hello_module_entry = {
+zend_module_entry yaus_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
     STANDARD_MODULE_HEADER,
 #endif
-    PHP_HELLO_WORLD_EXTNAME,
-    hello_functions,
-    PHP_MINIT(hello_world),
+    PHP_YAUS_EXTNAME,
+    yaus_functions,
+    PHP_MINIT(yaus),
     NULL,
     NULL,
     NULL,
     NULL,
 #if ZEND_MODULE_API_NO >= 20010901
-    PHP_HELLO_WORLD_VERSION,
+    PHP_YAUS_VERSION,
 #endif
     STANDARD_MODULE_PROPERTIES
 };
 
-PHP_MINIT_FUNCTION(hello_world)
+PHP_MINIT_FUNCTION(yaus)
 {
+	stem_en_init();
 	stem_ru_init();
 	return SUCCESS;
 }
 
-#ifdef COMPILE_DL_HELLO
+#ifdef COMPILE_DL_YAUS
 extern "C" {
-ZEND_GET_MODULE(hello)
+ZEND_GET_MODULE(yaus)
 }
 #endif
 
 #define PHP_STEM_DEBUG 0
 
-PHP_FUNCTION(hello_world)
+PHP_FUNCTION(stemword_ru_cp1251)
 {
 #if PHP_STEM_DEBUG
 	const char* fmt = "\t%d";

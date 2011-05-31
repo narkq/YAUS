@@ -1,11 +1,11 @@
-PHP_ARG_ENABLE(hello,
-	[whether to enable Hello World support],
-	[ --enable-hello   Enable Hello World support])
+PHP_ARG_ENABLE(yaus,
+	[whether to enable YAUS support],
+	[ --enable-yaus   Enable YAUS support])
 
-if test "$PHP_HELLO" = "yes"; then
-  AC_DEFINE(HAVE_HELLO, 1, [Whether you have Hello World])
+if test "$PHP_YAUS" = "yes"; then
+  AC_DEFINE(HAVE_YAUS, 1, [Whether you have YAUS])
   PHP_REQUIRE_CXX()
-  PHP_SUBST(HELLO_SHARED_LIBADD)
-  PHP_ADD_LIBRARY(stdc++, 1, VEHICLES_SHARED_LIBADD)
-  PHP_NEW_EXTENSION(hello, hello.cc sphinxstemru.cpp, $ext_shared)
+  PHP_SUBST(YAUS_SHARED_LIBADD)
+  PHP_ADD_LIBRARY(stdc++, 1, YAUS_SHARED_LIBADD)
+  PHP_NEW_EXTENSION(yaus, yaus.cc sphinxstemru.cpp, $ext_shared)
 fi
