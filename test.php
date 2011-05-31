@@ -29,9 +29,10 @@ $words = array(
 	'сталеварами',
 );
 
+$syscall_path = '../bloat/src/bloat';
 foreach ($words as $word)
 {
-	$right = substr(`~/src/bloat/bin/Debug/bloat $word`, 0, -1);
+	$right = substr(`$syscall_path $word`, 0, -1);
 	$result = stemword_ru_cp1251($word);
 	if ($result !== $right)
 	{
@@ -49,10 +50,10 @@ $b = microtime(true);
 for ($i = 0; $i < $c; $i++)
 {
 	foreach ($words as $word)
-		`~/src/bloat/bin/Debug/bloat $word`;
+		`$syscall_path $word`;
 }
 $t = microtime(true) - $b;
-echo "SYSCALL: ".($t/1000)."\n";
+echo "SYSCALL: ".($t)."\n";
 
 $b = microtime(true);
 for ($i = 0; $i < $c; $i++)
@@ -61,4 +62,4 @@ for ($i = 0; $i < $c; $i++)
 		stemword_ru_cp1251($word);
 }
 $t = microtime(true) - $b;
-echo "FUNCCALL: ".($t/1000)."\n";
+echo "FUNCCALL: ".($t)."\n";

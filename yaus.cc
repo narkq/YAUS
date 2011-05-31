@@ -50,10 +50,6 @@ PHP_FUNCTION(stemword_ru_cp1251)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
 		RETURN_NULL();
 	}
-	//if (init) {
-		//init = false;
-		//stem_ru_init();
-	//}
 	sph_word = (BYTE*) emalloc(sizeof(BYTE) * (wordlen + 1));
 	out_word = estrdup(word);
 #if PHP_STEM_DEBUG
@@ -65,7 +61,7 @@ PHP_FUNCTION(stemword_ru_cp1251)
 #if PHP_STEM_DEBUG
 		php_printf(fmt, word[i]);
 #endif
-		sph_word[i] = word[i] < 0 ? word[i] + 256 : word[i];
+		sph_word[i] = (BYTE)word[i];
 	}
 	sph_word[wordlen] = 0;
 #if PHP_STEM_DEBUG
@@ -90,7 +86,7 @@ PHP_FUNCTION(stemword_ru_cp1251)
 			out_word[i] = 0;
 		else
 		{
-			out_word[i] = sph_word[i] > 127 ? sph_word[i] - 256 : sph_word[i];
+			out_word[i] = (char)sph_word[i];
 			stemlen++;
 		}
 	}
