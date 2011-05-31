@@ -1,0 +1,3 @@
+Yet Another Useless Stemmer
+
+This is a really clumsy attempt at porting Sphinx built-in stemmers to PHP without losing much in performance.
