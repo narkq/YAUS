@@ -3,6 +3,7 @@
 This is a really clumsy attempt at porting Sphinx built-in stemmers to PHP without losing much in performance.
 
 Installation procedure is as usual:
+
     cd <extension path>
     phpize
     ./configure
@@ -12,6 +13,7 @@ Installation procedure is as usual:
 Do not forget to add `yaus.so` to your `php.ini` file!
 
 If you want to run included `test.php`, you should build `stemword` utility as following:
+
     cd <extension path>/libsphinx
     ./buildconf.sh
     ./configure
