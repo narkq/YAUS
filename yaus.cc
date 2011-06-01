@@ -1,5 +1,5 @@
 #include "php_yaus.h"
-#include "sphinxstem.h"
+#include "libsphinx/src/sphinxstem.h"
 
 static function_entry yaus_functions[] = {
     PHP_FE(stemword_ru_cp1251, NULL)
