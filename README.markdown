@@ -22,4 +22,4 @@ If you want to run included `test.php`, you should build `stemword` utility as f
 Now the extension adds just one function, it works like this:
 
     <?php
-    echo stemword_ru_cp1251('неожиданность');
+    echo stemword_ru_cp1251('РЅРµРѕР¶РёРґР°РЅРЅРѕСЃС‚СЊ');
