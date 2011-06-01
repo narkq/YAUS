@@ -18,3 +18,8 @@ If you want to run included `test.php`, you should build `stemword` utility as f
     ./buildconf.sh
     ./configure
     make
+
+Now the extension adds just one function, it works like this:
+
+    <?php
+    echo stemword_ru_cp1251('неожиданность');
