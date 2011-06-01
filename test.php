@@ -45,15 +45,19 @@ foreach ($words as $word)
 }
 
 $c = 50;
+$n = 0;
 
 $b = microtime(true);
 for ($i = 0; $i < $c; $i++)
 {
 	foreach ($words as $word)
+	{
 		`$syscall_path $word`;
+		$n++;
+	}
 }
 $t = microtime(true) - $b;
-echo "SYSCALL: ".($t)."\n";
+echo "system call: ".($t)."\t(".($t/$n)." per call)\n";
 
 $b = microtime(true);
 for ($i = 0; $i < $c; $i++)
@@ -62,4 +66,4 @@ for ($i = 0; $i < $c; $i++)
 		stemword_ru_cp1251($word);
 }
 $t = microtime(true) - $b;
-echo "FUNCCALL: ".($t)."\n";
+echo "function call: ".($t)."\t(".($t/$n)." per call)\n";
