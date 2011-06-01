@@ -1,39 +1,17 @@
 <?php
-$words = array(
-	'сучка',
-	'сучкой',
-	'сучку',
-	'сучке',
-	'директором',
-	'директорам',
-	'директору',
-	'бухгалтерский',
-	'бухгалтерская',
-	'бухгалтерское',
-	'домашний',
-	'домашная',
-	'домашнее',
-	'менеджер',
-	'менеджеру',
-	'менеджера',
-	'менеджере',
-	'менеджером',
-	'менеджерам',
-	'менеджерами',
-	'сталевар',
-	'сталевару',
-	'сталевара',
-	'сталеваре',
-	'сталеваром',
-	'сталеварам',
-	'сталеварами',
-);
+$enc = 'windows-1251';
+$u = 'utf-8';
+$words = file('wordlist.txt');
+foreach ($words as $key => $word)
+{
+	$words[$key] = iconv($u, $enc, substr($word, 0, -1));
+}
 
 $syscall_path = './libsphinx/src/stemword';
 foreach ($words as $word)
 {
-	$right = substr(`$syscall_path $word`, 0, -1);
-	$result = stemword_ru_cp1251($word);
+	$right = iconv($enc, $u, substr(`$syscall_path $word`, 0, -1));
+	$result = iconv($enc, $u, stemword_ru_cp1251($word));
 	if ($result !== $right)
 	{
 		echo "FAIL!\t($word)\t$result\tinstead of\t$right\n";
@@ -44,7 +22,7 @@ foreach ($words as $word)
 	}
 }
 
-$c = 50;
+$c = 10;
 $n = 0;
 
 $b = microtime(true);
