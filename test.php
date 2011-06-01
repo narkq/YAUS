@@ -10,15 +10,15 @@ foreach ($words as $key => $word)
 $syscall_path = './libsphinx/src/stemword';
 foreach ($words as $word)
 {
-	$right = iconv($enc, $u, substr(`$syscall_path $word`, 0, -1));
-	$result = iconv($enc, $u, stemword_ru_cp1251($word));
+	$right = substr(`$syscall_path $word`, 0, -1);
+	$result = stemword_ru_cp1251($word);
 	if ($result !== $right)
 	{
-		echo "FAIL!\t($word)\t$result\tinstead of\t$right\n";
+		echo iconv($enc, $u, "FAIL!\t($word)\t$result\tinstead of\t$right\n");
 	}
 	else
 	{
-		echo "PASS \t($word)\n";
+		echo iconv($enc, $u, "PASS \t($word)\n");
 	}
 }
 
