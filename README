@@ -9,7 +9,7 @@ phpize
 make
 sudo make install
 
-then add yaus.so to your php.ini file.
+Do not forget to add yaus.so to your php.ini file!
 
 If you want to run included test.php, you should build stemword utility as following:
 cd <extension path>/libsphinx
