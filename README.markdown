@@ -2,9 +2,14 @@
 
 This is a really clumsy attempt at porting Sphinx built-in stemmers to PHP without losing much in performance.
 
-Installation procedure is as usual:
+Installation procedure is as usual, but you need to build `libsphinx` first:
 
     cd <extension path>
+    cd libsphinx
+    ./buildconf.sh
+    ./configure
+    make
+    cd ..
     phpize
     ./configure
     make
@@ -12,12 +17,9 @@ Installation procedure is as usual:
 
 Do not forget to add `yaus.so` to your `php.ini` file!
 
-If you want to run included `test.php`, you should build `stemword` utility as following:
+After this you might want to run included `test.php`, it's easy and doesn't require anything besides this extension.
 
-    cd <extension path>/libsphinx
-    ./buildconf.sh
-    ./configure
-    make
+	php -f test.php
 
 Now the extension adds just one function, it works like this:
 
