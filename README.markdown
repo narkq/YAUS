@@ -2,6 +2,9 @@
 
 This is a really clumsy attempt at porting Sphinx built-in stemmers to PHP without losing much in performance.
 
+For now **only** single-byte built-in english and russian stemmers are supported.
+The rest (soundex, double metaphone, libstemmer and unicode versions of these) are likely to be added soon.
+
 Installation procedure is as usual, but you need to build `libsphinx` first:
 
     cd <extension path>
@@ -14,6 +17,8 @@ Installation procedure is as usual, but you need to build `libsphinx` first:
     ./configure
     make
     sudo make install
+
+Make sure you've got `autoconf` installed, `buildconf` and `phpize` scripts just won't work otherwise!
 
 Do not forget to add `yaus.so` to your `php.ini` file!
 
