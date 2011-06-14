@@ -21,7 +21,13 @@ After this you might want to run included `test.php`, it's easy and doesn't requ
 
 	php -f test.php
 
-Now the extension adds just one function, it works like this:
+Now the extension adds just three functions, they work like this:
 
     <?php
-    echo stemword_ru_cp1251('неожиданность');
+	// get stem of a russian word in cp1251 encoding
+    echo stemword_ru('неожиданность');
+	// get stem of an english word
+    echo stemword_en('googling');
+	// get stem of a russian or english word
+	echo stemword_enru('дружелюбие');
+	echo stemword_enru('supposedly');
