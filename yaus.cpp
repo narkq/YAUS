@@ -2,7 +2,9 @@
 #include "libsphinx/src/sphinxstem.h"
 
 static function_entry yaus_functions[] = {
-    PHP_FE(stemword_ru_cp1251, NULL)
+    PHP_FE(stemword_ru, NULL)
+    PHP_FE(stemword_en, NULL)
+    PHP_FE(stemword_enru, NULL)
     {NULL, NULL, NULL}
 };
 
@@ -26,6 +28,7 @@ zend_module_entry yaus_module_entry = {
 PHP_MINIT_FUNCTION(yaus)
 {
 	stem_ru_init();
+	stem_en_init();
 	return SUCCESS;
 }
 
@@ -35,74 +38,65 @@ ZEND_GET_MODULE(yaus)
 }
 #endif
 
-#define PHP_STEM_DEBUG 0
 
-PHP_FUNCTION(stemword_ru_cp1251)
+PHP_FUNCTION(stemword_ru)
 {
-#if PHP_STEM_DEBUG
-	const char* fmt = "\t%d";
-#endif
-	//static bool init = true;
-	char *word, *out_word;
-	BYTE* sph_word;
-	int wordlen, i, stemlen = 0;
-	bool stem_complete = false;
+	char *word;
+	char *result;
+	int wordlen;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
 		RETURN_NULL();
 	}
-	sph_word = (BYTE*) emalloc(sizeof(BYTE) * (wordlen + 1));
-	out_word = estrdup(word);
-#if PHP_STEM_DEBUG
-	php_printf("BEFORE\nword: %s\n", word);
-	php_printf("signed charcodes: ");
-#endif
-	for (i = 0; i < wordlen; i++)
-	{
-#if PHP_STEM_DEBUG
-		php_printf(fmt, word[i]);
-#endif
-		sph_word[i] = (BYTE)word[i];
-	}
-	sph_word[wordlen] = 0;
-#if PHP_STEM_DEBUG
-	php_printf("\nunsigned charcodes: ");
-	for (i = 0; i < wordlen; i++)
-	{
-		php_printf(fmt, sph_word[i]);
-	}
-#endif
-	stem_ru_cp1251(sph_word);
-#if PHP_STEM_DEBUG
-	php_printf("\nAFTER\nunsigned charcodes: ");
-#endif
-	for (i = 0; i < wordlen; i++)
-	{
-#if PHP_STEM_DEBUG
-		php_printf(fmt, sph_word[i]);
-#endif
-		if (sph_word[i] == 0)
-			stem_complete = true;
-		if (stem_complete)
-			out_word[i] = 0;
-		else
-		{
-			out_word[i] = (char)sph_word[i];
-			stemlen++;
-		}
-	}
-	efree(sph_word);
-#if PHP_STEM_DEBUG
-	php_printf("\nsigned charcodes: ");
-	for (i = 0; i < wordlen; i++)
-		php_printf(fmt, out_word[i]);
-	php_printf("\nword after: ");
-	php_printf("%s\n", word);
-#endif
+	//We need to get a copy of input parameters, because stem functions
+	//are destructive.
+	result = estrdup(word);
+
+	stem_ru_cp1251((BYTE *)result);
+
 	Z_TYPE_P(return_value) = IS_STRING;
-	Z_STRVAL_P(return_value) = estrdup(out_word);
-	Z_STRLEN_P(return_value) = stemlen;
-	efree(out_word);
-#if PHP_STEM_DEBUG
-	php_printf("%s\t%d\n", return_value->value.str.val, return_value->value.str.len);
-#endif
+	Z_STRVAL_P(return_value) = estrdup(result);
+	Z_STRLEN_P(return_value) = strlen(result);
+	efree(result);
+}
+
+PHP_FUNCTION(stemword_en)
+{
+	char *word;
+	char *result;
+	int wordlen;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
+		RETURN_NULL();
+	}
+	//We need to get a copy of input parameters, because stem functions
+	//are destructive.
+	result = estrdup(word);
+
+	stem_en((BYTE *)result, wordlen);
+        
+	Z_TYPE_P(return_value) = IS_STRING;
+	Z_STRVAL_P(return_value) = estrdup(result);
+	Z_STRLEN_P(return_value) = strlen(result);
+	efree(result);
+}
+
+PHP_FUNCTION(stemword_enru)
+{
+	char *word;
+	char *result;
+	int wordlen;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
+		RETURN_NULL();
+	}
+	//We need to get a copy of input parameters, because stem functions
+	//are destructive.
+	result = estrdup(word);
+
+	//Theoretically, the order of stemming is irrelevant.
+	stem_en((BYTE *)result, wordlen);
+	stem_ru_cp1251((BYTE *)result);
+        
+	Z_TYPE_P(return_value) = IS_STRING;
+	Z_STRVAL_P(return_value) = estrdup(result);
+	Z_STRLEN_P(return_value) = strlen(result);
+	efree(result);
 }

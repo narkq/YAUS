@@ -13,7 +13,9 @@ extern "C" {
 }
 
 PHP_MINIT_FUNCTION(yaus);
-PHP_FUNCTION(stemword_ru_cp1251);
+PHP_FUNCTION(stemword_ru);
+PHP_FUNCTION(stemword_en);
+PHP_FUNCTION(stemword_enru);
 
 extern zend_module_entry yaus_module_entry;
 #define phpext_yaus_ptr &yaus_module_entry

@@ -11,7 +11,7 @@ $syscall_path = './libsphinx/src/stemword';
 foreach ($words as $word)
 {
 	$right = substr(`$syscall_path $word`, 0, -1);
-	$result = stemword_ru_cp1251($word);
+	$result = stemword_enru($word);
 	if ($result !== $right)
 	{
 		echo iconv($enc, $u, "FAIL!\t($word)\t$result\tinstead of\t$right\n");
@@ -41,7 +41,7 @@ $b = microtime(true);
 for ($i = 0; $i < $c; $i++)
 {
 	foreach ($words as $word)
-		stemword_ru_cp1251($word);
+		stemword_enru($word);
 }
 $t = microtime(true) - $b;
 echo "function call: ".($t)."\t(".($t/$n)." per call)\n";
