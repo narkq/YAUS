@@ -2,14 +2,14 @@
 
 This is a really clumsy attempt at porting Sphinx built-in stemmers to PHP without losing much in performance.
 
-For now **only** single-byte built-in english and russian stemmers are supported.
+For now **only** built-in english and russian stemmers are supported.
 The rest (soundex, double metaphone, libstemmer and unicode versions of these) are likely to be added soon.
 
 Installation procedure is as usual, but you need to build `libsphinx` first:
 
     cd <extension path>
+    ./download-sphinx.sh
     cd libsphinx
-    ./buildconf.sh
     ./configure
     make
     cd ..
@@ -18,21 +18,16 @@ Installation procedure is as usual, but you need to build `libsphinx` first:
     make
     sudo make install
 
-Make sure you've got `autoconf` installed, `buildconf` and `phpize` scripts just won't work otherwise!
+Make sure you've got `autoconf` installed, `phpize` script just won't work otherwise!
 
 Do not forget to add `yaus.so` to your `php.ini` file!
-
-After this you might want to run included `test.php`, it's easy and doesn't require anything besides this extension.
-
-	php -f test.php
 
 Now the extension adds just three functions, they work like this:
 
     <?php
-	// get stem of a russian word in cp1251 encoding
-    echo stemword_ru('неожиданность');
-	// get stem of an english word
+    // gets the stem of a russian word
+    function stemword_ru($russian_word, $is_utf8);
+    // gets the stem of an english word
     echo stemword_en('googling');
-	// get stem of a russian or english word
-	echo stemword_enru('дружелюбие');
-	echo stemword_enru('supposedly');
+    // gets the stem of a russian or english word
+    function stemword_ru($russian_or_english_word, $is_utf8);
