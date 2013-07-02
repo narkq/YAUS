@@ -31,3 +31,11 @@ Now the extension adds just three functions, they work like this:
     echo stemword_en('googling');
     // gets the stem of a russian or english word
     function stemword_ru($russian_or_english_word, $is_utf8);
+
+### CHANGELOG
+
+*	v 0.2.0
+	Added $is_utf8 parameter to stem functions for russian words.
+
+*	v 0.1
+	Yay, first release!
