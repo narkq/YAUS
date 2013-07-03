@@ -30,6 +30,10 @@ Now the extension adds just three functions, they work like this:
 
 ### CHANGELOG
 
+*	v 0.2.1
+
+	Minor portability fixes.
+
 *	v 0.2.0
 
 	Added `$is_utf8` parameter to stem functions for russian words.
