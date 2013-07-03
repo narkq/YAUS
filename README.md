@@ -31,7 +31,9 @@ Now the extension adds just three functions, they work like this:
 ### CHANGELOG
 
 *	v 0.2.0
-	Added $is_utf8 parameter to stem functions for russian words.
+
+	Added `$is_utf8` parameter to stem functions for russian words.
 
 *	v 0.1
+
 	Yay, first release!
