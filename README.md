@@ -28,7 +28,7 @@ Now the extension adds just three functions, they work like this:
     // gets the stem of a russian word
     function stemword_ru($russian_word, $is_utf8);
     // gets the stem of an english word
-    echo stemword_en('googling');
+    function stemword_ru($english_word);
     // gets the stem of a russian or english word
     function stemword_ru($russian_or_english_word, $is_utf8);
 
