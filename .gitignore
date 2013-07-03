@@ -15,10 +15,13 @@ config.h
 config.h.in
 config.log
 config.nice
+config.nice.bat
 config.status
 config.sub
 configure
 configure.in
+configure.bat
+configure.js
 install-sh
 libtool
 ltmain.sh
@@ -34,4 +37,8 @@ tests/*.php
 tests/*.sh
 php_test_results_*
 tmp-php.ini
+Release
+Release_TS
+Debug
+Debug_TS
 libsphinx

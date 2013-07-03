@@ -1,0 +1,11 @@
+ARG_WITH("yaus", "YAUS support", "no");
+
+if (PHP_YAUS != "no") {
+	if (CHECK_HEADER_ADD_INCLUDE("sphinx.h", "CFLAGS_YAUS", PHP_PHP_BUILD + "\\include;" + PHP_YAUS) &&
+		CHECK_LIB("libsphinx.lib", "yaus")) {
+		EXTENSION('yaus', 'yaus.cpp');
+		AC_DEFINE('HAVE_YAUS', 1);
+	} else {
+		WARNING("YAUS not enabled; libraries and headers not found");
+	}
+}
