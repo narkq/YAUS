@@ -14,7 +14,7 @@ Installation procedure is as usual, but you need to build `libsphinx` first:
     make
     sudo make install
 
-Make sure you've got `autoconf` installed, `build-libsphinx.sh` and `phpize` scripts just won't work otherwise!
+Make sure you've got `wget` and `autoconf` installed, `build-libsphinx.sh` and `phpize` scripts just won't work otherwise!
 
 Do not forget to add `yaus.so` to your `php.ini` file!
 
