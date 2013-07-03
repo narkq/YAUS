@@ -1,0 +1,10 @@
+--- libsphinx/src/Makefile.am	2013-07-03 12:42:22.954308058 +0400
++++ libsphinx/src/Makefile.am	2013-07-03 12:42:37.499342265 +0400
+@@ -21,6 +21,6 @@
+ extract-version:
+ 	/bin/sh svnxrev.sh ..
+ 
+-AM_CPPFLAGS = -DSYSCONFDIR="\"$(sysconfdir)\"" -DDATADIR="\"$(localstatedir)/data\""
++AM_CPPFLAGS = -DSYSCONFDIR="\"$(sysconfdir)\"" -DDATADIR="\"$(localstatedir)/data\"" -fPIC
+ COMMON_LIBS = libsphinx.a $(LIBSTEMMER_LIBS) $(MYSQL_LIBS) $(PGSQL_LIBS)
+ LDADD = $(COMMON_LIBS)

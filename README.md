@@ -8,17 +8,13 @@ The rest (soundex, double metaphone, libstemmer and unicode versions of these) a
 Installation procedure is as usual, but you need to build `libsphinx` first:
 
     cd <extension path>
-    ./download-sphinx.sh
-    cd libsphinx
-    ./configure
-    make
-    cd ..
+    ./build-libsphinx.sh
     phpize
     ./configure
     make
     sudo make install
 
-Make sure you've got `autoconf` installed, `phpize` script just won't work otherwise!
+Make sure you've got `autoconf` installed, `build-libsphinx.sh` and `phpize` scripts just won't work otherwise!
 
 Do not forget to add `yaus.so` to your `php.ini` file!
 
@@ -28,9 +24,9 @@ Now the extension adds just three functions, they work like this:
     // gets the stem of a russian word
     function stemword_ru($russian_word, $is_utf8);
     // gets the stem of an english word
-    function stemword_ru($english_word);
+    function stemword_en($english_word);
     // gets the stem of a russian or english word
-    function stemword_ru($russian_or_english_word, $is_utf8);
+    function stemword_enru($russian_or_english_word, $is_utf8);
 
 ### CHANGELOG
 
