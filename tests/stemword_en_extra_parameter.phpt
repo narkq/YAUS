@@ -11,5 +11,5 @@ if (!extension_loaded("yaus"))
 var_dump(stemword_en('speedy', true));
 ?>
 --EXPECTF--
-Warning: stemword_en() expects exactly 1 parameter, 2 given in %s/tests/stemword_en_extra_parameter.php on line %d
+Warning: stemword_en() expects exactly 1 parameter, 2 given in %sstemword_en_extra_parameter.php on line %d
 NULL

@@ -19,8 +19,8 @@ string(4) "stun"
 string(4) "stun"
 string(4) "stun"
 
-Warning: stemword_ru() expects parameter 2 to be boolean, array given in %s/tests/stemword_ru_is_utf_parameter.php on line %d
+Warning: stemword_ru() expects parameter 2 to be boolean, array given in %sstemword_ru_is_utf_parameter.php on line %d
 NULL
 
-Warning: stemword_ru() expects parameter 2 to be boolean, object given in %s/tests/stemword_ru_is_utf_parameter.php on line %d
+Warning: stemword_ru() expects parameter 2 to be boolean, object given in %sstemword_ru_is_utf_parameter.php on line %d
 NULL
