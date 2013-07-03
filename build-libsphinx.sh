@@ -4,7 +4,7 @@ wget http://sphinxsearch.com/files/sphinx-$SPHINX_VERSION-release.tar.gz \
 	&& tar zxf sphinx-$SPHINX_VERSION-release.tar.gz \
 	&& rm sphinx-$SPHINX_VERSION-release.tar.gz \
 	&& mv sphinx-$SPHINX_VERSION-release libsphinx \
-	&& patch -p0 < sphinx-$SPHINX_VERSION-fPIC.patch \
+	&& patch -p0 < patches/sphinx-$SPHINX_VERSION-fPIC.patch \
 	&& pushd libsphinx \
 	&& ./buildconf.sh \
 	&& ./configure \
