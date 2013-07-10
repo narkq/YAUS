@@ -15,5 +15,6 @@ if test "$PHP_YAUS" = "yes"; then
 	PHP_SUBST(YAUS_SHARED_LIBADD)
 	PHP_ADD_LIBRARY(stdc++, 1, YAUS_SHARED_LIBADD)
 	PHP_ADD_LIBRARY_WITH_PATH(sphinx, libsphinx/src, YAUS_SHARED_LIBADD)
+	PHP_ADD_LIBRARY_WITH_PATH(stemmer, libsphinx/libstemmer_c, YAUS_SHARED_LIBADD)
 	PHP_NEW_EXTENSION(yaus, yaus.cpp, $ext_shared)
 fi

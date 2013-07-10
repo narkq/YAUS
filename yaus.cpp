@@ -1,10 +1,19 @@
 #include "php_yaus.h"
 #include "libsphinx/src/sphinxstem.h"
+#include "libstemmer.h"
+
+/* list entry identifier for snowball stemmer resource */
+int le_yaus_snowball_stemmer;
 
 static function_entry yaus_functions[] = {
     PHP_FE(stemword_ru, NULL)
     PHP_FE(stemword_en, NULL)
     PHP_FE(stemword_enru, NULL)
+    PHP_FE(stemword_soundex, NULL)
+    PHP_FE(stemword_dmetaphone, NULL)
+    PHP_FE(stemword_snowball_new, NULL)
+    PHP_FE(stemword_snowball_stem, NULL)
+    PHP_FE(stemword_snowball_delete, NULL)
     {NULL, NULL, NULL}
 };
 
@@ -18,7 +27,7 @@ zend_module_entry yaus_module_entry = {
     NULL,
     NULL,
     NULL,
-    NULL,
+    PHP_MINFO(yaus),
 #if ZEND_MODULE_API_NO >= 20010901
     PHP_YAUS_VERSION,
 #endif
@@ -29,7 +38,16 @@ PHP_MINIT_FUNCTION(yaus)
 {
 	stem_ru_init();
 	stem_en_init();
+	le_yaus_snowball_stemmer = zend_register_list_destructors_ex(php_yaus_snowball_stemmer_dtor, NULL, PHP_YAUS_SHOWBALL_STEMMER_RES_NAME, module_number);
 	return SUCCESS;
+}
+
+PHP_MINFO_FUNCTION(yaus)
+{
+	php_info_print_table_start();
+	php_info_print_table_header(2, "Version", PHP_YAUS_VERSION);
+	php_info_print_table_header(2, "Compiled", __DATE__ " @ "  __TIME__);
+	php_info_print_table_header(2, "libsphinx version", SPHINX_VERSION);
 }
 
 #ifdef COMPILE_DL_YAUS
@@ -115,4 +133,120 @@ PHP_FUNCTION(stemword_enru)
 	Z_STRVAL_P(return_value) = estrdup(result);
 	Z_STRLEN_P(return_value) = strlen(result);
 	efree(result);
+}
+
+PHP_FUNCTION(stemword_soundex)
+{
+	char *word;
+	char *result;
+	int wordlen;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
+		RETURN_NULL();
+	}
+	//We need to get a copy of input parameters, because stem functions
+	//are destructive.
+	result = estrdup(word);
+
+	stem_soundex((BYTE *)result);
+
+	Z_TYPE_P(return_value) = IS_STRING;
+	Z_STRVAL_P(return_value) = estrdup(result);
+	Z_STRLEN_P(return_value) = strlen(result);
+	efree(result);
+}
+
+PHP_FUNCTION(stemword_dmetaphone)
+{
+	char *word;
+	char *result;
+	int wordlen;
+	bool is_utf;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sb", &word, &wordlen, &is_utf) == FAILURE) {
+		RETURN_NULL();
+	}
+	//We need to get a copy of input parameters, because stem functions
+	//are destructive.
+	result = estrdup(word);
+
+	stem_dmetaphone((BYTE *)result, is_utf);
+
+	Z_TYPE_P(return_value) = IS_STRING;
+	Z_STRVAL_P(return_value) = estrdup(result);
+	Z_STRLEN_P(return_value) = strlen(result);
+	efree(result);
+}
+
+PHP_FUNCTION(stemword_snowball_new)
+{
+	php_yaus_snowball_stemmer *stemmer_resource;
+	char *algorithm;
+	int algorithm_len;
+	char *charenc;
+	int charenc_len;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &algorithm, &algorithm_len, &charenc, &charenc_len) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	stemmer_resource = reinterpret_cast<php_yaus_snowball_stemmer *>(emalloc(sizeof(php_yaus_snowball_stemmer)));
+	stemmer_resource->stemmer = sb_stemmer_new(algorithm, charenc);
+	if (!stemmer_resource->stemmer) {
+		efree(stemmer_resource);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Could not create stemmer with %s algorithm for %s charset", algorithm, charenc);
+		RETURN_FALSE;
+	}
+
+	ZEND_REGISTER_RESOURCE(return_value, stemmer_resource, le_yaus_snowball_stemmer);
+}
+
+PHP_FUNCTION(stemword_snowball_stem)
+{
+	php_yaus_snowball_stemmer *stemmer_resource;
+	zval *stemmer_resource_zval;
+	char *word;
+	int word_len;
+	const sb_symbol *result;
+	int result_len;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "rs", &stemmer_resource_zval, &word, &word_len) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	ZEND_FETCH_RESOURCE(stemmer_resource, php_yaus_snowball_stemmer*, &stemmer_resource_zval, -1, PHP_YAUS_SHOWBALL_STEMMER_RES_NAME, le_yaus_snowball_stemmer);
+
+	if (!stemmer_resource->stemmer) {
+		efree(stemmer_resource);
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Lost reference to a stemmer");
+		RETURN_FALSE;
+	}
+
+	result = sb_stemmer_stem(stemmer_resource->stemmer, reinterpret_cast<const sb_symbol *>(word), word_len);
+	result_len = sb_stemmer_length(stemmer_resource->stemmer);
+
+	Z_TYPE_P(return_value) = IS_STRING;
+	Z_STRVAL_P(return_value) = estrdup(reinterpret_cast<const char *>(result));
+	Z_STRLEN_P(return_value) = result_len;
+}
+
+PHP_FUNCTION(stemword_snowball_delete)
+{
+	zval *stemmer_resource_zval;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &stemmer_resource_zval) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	zend_list_delete(Z_LVAL_P(stemmer_resource_zval));
+	RETURN_TRUE;
+}
+
+static void php_yaus_snowball_stemmer_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC)
+{
+	php_yaus_snowball_stemmer *stemmer_resource = (php_yaus_snowball_stemmer *) rsrc->ptr;
+
+	if (stemmer_resource) {
+		if (stemmer_resource->stemmer) {
+			sb_stemmer_delete(stemmer_resource->stemmer);
+		}
+		efree(stemmer_resource);
+	}
 }

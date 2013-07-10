@@ -7,6 +7,9 @@ wget http://sphinxsearch.com/files/sphinx-$SPHINX_VERSION-release.tar.gz \
 	&& patch -p0 < patches/sphinx-$SPHINX_VERSION-fPIC.patch \
 	&& pushd libsphinx \
 	&& ./buildconf.sh \
-	&& ./configure \
+	&& wget http://snowball.tartarus.org/dist/libstemmer_c.tgz \
+	&& tar zxf libstemmer_c.tgz \
+	&& rm libstemmer_c.tgz \
+	&& ./configure --without-mysql --without-libexpat --without-iconv --with-libstemmer \
 	&& make -j2 \
 	&& popd
