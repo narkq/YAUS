@@ -1,6 +1,6 @@
 #include "php_yaus.h"
 #include "libsphinx/src/sphinxstem.h"
-#include "libstemmer.h"
+#include "libsphinx/libstemmer_c/include/libstemmer.h"
 
 /* list entry identifier for snowball stemmer resource */
 int le_yaus_snowball_stemmer;

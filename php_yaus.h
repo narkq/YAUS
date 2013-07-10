@@ -13,7 +13,7 @@ extern "C" {
 #include "ext/standard/info.h"
 }
 
-#include "libstemmer.h"
+#include "libsphinx/libstemmer_c/include/libstemmer.h"
 
 typedef struct _php_yaus_snowball_stemmer {
 	struct sb_stemmer *stemmer;
