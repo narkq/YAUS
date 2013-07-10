@@ -8,3 +8,11 @@
 +AM_CPPFLAGS = -DSYSCONFDIR="\"$(sysconfdir)\"" -DDATADIR="\"$(localstatedir)/data\"" -fPIC
  COMMON_LIBS = libsphinx.a $(LIBSTEMMER_LIBS) $(MYSQL_LIBS) $(PGSQL_LIBS)
  LDADD = $(COMMON_LIBS)
+--- libsphinx/libstemmer_c/Makefile.am	Tue May 29 14:42:41 2007
++++ libsphinx/libstemmer_c/Makefile.am	Thu Jul 11 00:56:11 2013
+@@ -1,4 +1,5 @@
+ if USE_LIBSTEMMER
++AM_CPPFLAGS = -fPIC
+ noinst_LIBRARIES = libstemmer.a
+ include $(srcdir)/mkinc.mak
+ noinst_HEADERS = $(snowball_headers)
