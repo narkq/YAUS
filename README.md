@@ -59,6 +59,11 @@ API is pretty old-fashioned, this may be changed in the future.
     function stemword_snowball_stem($stemmer, $word);
 
     /**
+     * gets the list of available stemming algorithms via libstemmer
+     */
+    function stemword_snowball_algorithm_list();
+
+    /**
      * frees the stemmer resource
      */
     function stemword_snowball_delete($stemmer);
