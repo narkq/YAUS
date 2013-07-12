@@ -30,6 +30,7 @@ PHP_FUNCTION(stemword_soundex);
 PHP_FUNCTION(stemword_dmetaphone);
 PHP_FUNCTION(stemword_snowball_new);
 PHP_FUNCTION(stemword_snowball_stem);
+PHP_FUNCTION(stemword_snowball_algorithm_list);
 PHP_FUNCTION(stemword_snowball_delete);
 
 static void php_yaus_snowball_stemmer_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);

@@ -13,6 +13,7 @@ static function_entry yaus_functions[] = {
     PHP_FE(stemword_dmetaphone, NULL)
     PHP_FE(stemword_snowball_new, NULL)
     PHP_FE(stemword_snowball_stem, NULL)
+    PHP_FE(stemword_snowball_algorithm_list, NULL)
     PHP_FE(stemword_snowball_delete, NULL)
     {NULL, NULL, NULL}
 };
@@ -225,6 +226,20 @@ PHP_FUNCTION(stemword_snowball_stem)
 	Z_TYPE_P(return_value) = IS_STRING;
 	Z_STRVAL_P(return_value) = estrdup(reinterpret_cast<const char *>(result));
 	Z_STRLEN_P(return_value) = result_len;
+}
+
+PHP_FUNCTION(stemword_snowball_algorithm_list)
+{
+	int i = 0;
+	const char **algo_list;
+
+	algo_list = sb_stemmer_list();
+	array_init(return_value);
+
+	while (algo_list[i]) {
+		add_next_index_string(return_value, estrdup(algo_list[i]), 1);
+		i++;
+	}
 }
 
 PHP_FUNCTION(stemword_snowball_delete)
