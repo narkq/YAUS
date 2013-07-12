@@ -230,8 +230,14 @@ PHP_FUNCTION(stemword_snowball_stem)
 PHP_FUNCTION(stemword_snowball_delete)
 {
 	zval *stemmer_resource_zval;
+	php_yaus_snowball_stemmer *stemmer_resource;
 
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "r", &stemmer_resource_zval) == FAILURE) {
+		RETURN_FALSE;
+	}
+
+	stemmer_resource = (php_yaus_snowball_stemmer *) zend_fetch_resource(&stemmer_resource_zval TSRMLS_CC, -1, PHP_YAUS_SHOWBALL_STEMMER_RES_NAME, NULL, 1, le_yaus_snowball_stemmer);
+	if (!stemmer_resource) {
 		RETURN_FALSE;
 	}
 
