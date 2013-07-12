@@ -43,7 +43,7 @@ API is pretty old-fashioned, this may be changed in the future.
     function stemword_soundex($english_word);
 
     /**
-     * gets the stem of an english word using double metaphone algorithm
+     * gets the stem of an english word using metaphone algorithm
      */
     function stemword_dmetaphone($english_word, $is_utf8);
 
