@@ -80,8 +80,6 @@ API is pretty old-fashioned, this may be changed in the future.
 
 ### TODO
 
-*	tests for recently added stemmers
-
 *	sphinx 2.1.1-beta build
 
 *	lemmatizer interface
