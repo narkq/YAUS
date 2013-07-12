@@ -8,7 +8,7 @@ if (!extension_loaded("yaus"))
 }
 --FILE--
 <?php
-$stemmer = stemword_snowball_new('ru', 'UTF_8');
+$stemmer = stemword_snowball_new('ru');
 $word_list = array_map(
 	function($word) {
 		return substr($word, 0, -1);

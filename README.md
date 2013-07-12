@@ -51,7 +51,7 @@ API is pretty old-fashioned, this may be changed in the future.
      * initializes the snowball stemmer
      * returns a resource
      */
-    function stemword_snowball_new($algorithm, $encoding);
+    function stemword_snowball_new($algorithm, $encoding = 'UTF_8');
 
     /**
      * gets the stem of a word using stemmer resource

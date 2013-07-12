@@ -182,9 +182,9 @@ PHP_FUNCTION(stemword_snowball_new)
 	php_yaus_snowball_stemmer *stemmer_resource;
 	char *algorithm;
 	int algorithm_len;
-	char *charenc;
+	char *charenc = NULL;
 	int charenc_len;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &algorithm, &algorithm_len, &charenc, &charenc_len) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &algorithm, &algorithm_len, &charenc, &charenc_len) == FAILURE) {
 		RETURN_FALSE;
 	}
 
