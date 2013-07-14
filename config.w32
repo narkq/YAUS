@@ -4,7 +4,7 @@ if (PHP_YAUS != "no") {
 	if (
 		CHECK_HEADER_ADD_INCLUDE("sphinx.h", "CFLAGS_YAUS") &&
 		CHECK_HEADER_ADD_INCLUDE("sphinxstem.h", "CFLAGS_YAUS") &&
-		CHECK_HEADER_ADD_INCLUDE("libstemmer.h", "CFLAGS_YAUS") &&
+		CHECK_HEADER_ADD_INCLUDE("libstemmer.h", "CFLAGS_YAUS", php_usual_include_suspects + "\\libsphinx\\libstemmer_c\\includes") &&
 		CHECK_LIB("libsphinx.lib", "yaus") &&
 		CHECK_LIB("libstemmer_c.lib", "yaus")
 	) {
