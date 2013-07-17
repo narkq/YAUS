@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 5.3
+
+env:
+  - NO_INTERACTION=1 TEST_TIMEOUT=120
+
+before_script:
+  - sh -c "./build-libsphinx.sh"
+  - sh -c "phpize && ./configure && make"
+
+script:
+  - sh -c "make test | tee result.txt"
+  - sh test-report.sh
