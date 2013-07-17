@@ -8,7 +8,9 @@ This is a really clumsy attempt at porting Sphinx built-in stemmers to PHP witho
 
 Almost every stemming algorithm that's implemented in Sphinx as of 2.0.6-release version is available here as well (`stem_cz` is an exception).
 
-Installation procedure is as usual, but you need to build `libsphinx` first:
+## Building
+
+Building procedure for Unix-like systems is quite usual, but you need to build `libsphinx` first:
 
     cd <extension path>
     ./build-libsphinx.sh
@@ -19,9 +21,11 @@ Installation procedure is as usual, but you need to build `libsphinx` first:
 
 Make sure you've got `wget` and `autoconf` installed, `build-libsphinx.sh` and `phpize` scripts just won't work otherwise!
 
-Also, C++ compiler is required to build this extension (and `libsphinx` too). GCC and MSVC 9.0 is known to work.
+Also, C++ compiler is required to build this extension (and `libsphinx` too). GCC is known to work.
 
 If you build this as a shared library, do not forget to add `yaus.so` to your `php.ini` file!
+
+## Using
 
 API is pretty old-fashioned, this may be changed in the future.
 
@@ -72,7 +76,7 @@ API is pretty old-fashioned, this may be changed in the future.
      */
     function stemword_snowball_delete($stemmer);
 
-### CHANGELOG
+## CHANGELOG
 
 *	v 0.2.1
 
@@ -87,12 +91,10 @@ API is pretty old-fashioned, this may be changed in the future.
 	Yay, first release!
 
 
-### TODO
+## TODO
 
-*	sphinx 2.1.1-beta build
+*	building guide for Windows
 
 *	lemmatizer interface
-
-*	travis build setup
 
 *	OOP-style interface
