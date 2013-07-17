@@ -188,7 +188,7 @@ PHP_FUNCTION(stemword_snowball_new)
 		RETURN_FALSE;
 	}
 
-	stemmer_resource = reinterpret_cast<php_yaus_snowball_stemmer *>(emalloc(sizeof(php_yaus_snowball_stemmer)));
+	stemmer_resource = static_cast<php_yaus_snowball_stemmer *>(emalloc(sizeof(php_yaus_snowball_stemmer)));
 	stemmer_resource->stemmer = sb_stemmer_new(algorithm, charenc);
 	if (!stemmer_resource->stemmer) {
 		efree(stemmer_resource);
