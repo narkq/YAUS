@@ -1,5 +1,9 @@
 # Yet Another Useless Stemmer
 
+[![Build Status](https://secure.travis-ci.org/narkq/YAUS.png?branch=master)](http://travis-ci.org/narkq/YAUS)
+
+## Introduction
+
 This is a really clumsy attempt at porting Sphinx built-in stemmers to PHP without losing much in performance.
 
 Almost every stemming algorithm that's implemented in Sphinx as of 2.0.6-release version is available here as well (`stem_cz` is an exception).
