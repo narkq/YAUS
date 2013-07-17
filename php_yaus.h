@@ -21,6 +21,15 @@ typedef struct _php_yaus_snowball_stemmer {
 
 #define PHP_YAUS_SHOWBALL_STEMMER_RES_NAME "Snowball stemmer"
 
+/* this is a copy-and-paste from sphinxstd.h */
+/// safety gap after the string end; for instance, UTF-8 Russian stemmer
+/// which treats strings as 16-bit word sequences needs this in some cases.
+/// note that this zero-filled gap does NOT include trailing C-string zero,
+/// and does NOT affect strlen() as well.
+#define YAUS_STRING_SAFETY_GAP 4
+
+char *yaus_estrndup_with_padding(const char *s, uint length);
+
 PHP_MINIT_FUNCTION(yaus);
 PHP_MINFO_FUNCTION(yaus);
 PHP_FUNCTION(stemword_ru);

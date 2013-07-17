@@ -58,6 +58,19 @@ ZEND_GET_MODULE(yaus)
 #endif
 
 
+char *yaus_estrndup_with_padding(const char *s, uint length)
+{
+	char *p;
+
+	p = (char *)emalloc(length + YAUS_STRING_SAFETY_GAP + 1);
+	if (UNEXPECTED(p == NULL)) {
+		return p;
+	}
+	memcpy(p, s, length);
+	memset(p + length, 0, YAUS_STRING_SAFETY_GAP + 1);
+	return p;
+}
+
 PHP_FUNCTION(stemword_ru)
 {
 	char *word;
@@ -69,7 +82,7 @@ PHP_FUNCTION(stemword_ru)
 	}
 	//We need to get a copy of input parameters, because stem functions
 	//are destructive.
-	result = estrdup(word);
+	result = yaus_estrndup_with_padding(word, wordlen);
 
 	if (!is_utf)
 	{
@@ -117,7 +130,7 @@ PHP_FUNCTION(stemword_enru)
 	}
 	//We need to get a copy of input parameters, because stem functions
 	//are destructive.
-	result = estrdup(word);
+	result = yaus_estrndup_with_padding(word, wordlen);
 
 	//Theoretically, the order of stemming is irrelevant.
 	stem_en((BYTE *)result, wordlen);
