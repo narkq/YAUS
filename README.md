@@ -78,6 +78,16 @@ API is pretty old-fashioned, this may be changed in the future.
 
 ## CHANGELOG
 
+*	v 0.3.0
+
+	* added the rest of builtin sphinx stemmers (except `stem_cz`)
+
+	* added stemmers from `libsphinx_c`
+
+	* fixed memory allocation for strings that passed into russian utf-8 stemmer
+
+	* added Windows support (build process is not documented yet); [prebuilt shared library](https://drive.google.com/folderview?id=0Bx7fvWqnm1IEenFlTFl3eWM5NG8&usp=sharing) is available for download
+
 *	v 0.2.1
 
 	Minor portability fixes.
