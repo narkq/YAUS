@@ -49,6 +49,7 @@ PHP_MINFO_FUNCTION(yaus)
 	php_info_print_table_header(2, "Version", PHP_YAUS_VERSION);
 	php_info_print_table_header(2, "Compiled", __DATE__ " @ "  __TIME__);
 	php_info_print_table_header(2, "libsphinx version", SPHINX_VERSION);
+	php_info_print_table_end();
 }
 
 #ifdef COMPILE_DL_YAUS
