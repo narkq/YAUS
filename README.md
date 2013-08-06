@@ -78,6 +78,10 @@ API is pretty old-fashioned, this may be changed in the future.
 
 ## CHANGELOG
 
+*	v 0.3.1
+
+	* fixed phpinfo() formatting
+
 *	v 0.3.0
 
 	* added the rest of builtin sphinx stemmers (except `stem_cz`)
