@@ -78,6 +78,10 @@ API is pretty old-fashioned, this may be changed in the future.
 
 ## CHANGELOG
 
+*	v 0.3.2
+
+	* fixed building procedure with new automake
+
 *	v 0.3.1
 
 	* fixed phpinfo() formatting
