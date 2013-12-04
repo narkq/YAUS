@@ -9,6 +9,7 @@ wget http://sphinxsearch.com/files/sphinx-$SPHINX_VERSION-release.tar.gz \
 	&& tar zxf libstemmer_c.tgz \
 	&& rm libstemmer_c.tgz \
 	&& patch -p1 < ../patches/sphinx-$SPHINX_VERSION-fPIC.patch \
+	&& patch -p1 < ../patches/sphinx-$SPHINX_VERSION-automake-compat.patch \
 	&& ./buildconf.sh \
 	&& ./configure --without-mysql --without-libexpat --without-iconv --with-libstemmer \
 	&& make -j2 \
