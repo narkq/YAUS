@@ -12,6 +12,7 @@ pushd libsphinx
 wget http://snowball.tartarus.org/dist/libstemmer_c.tgz
 tar zxf libstemmer_c.tgz
 rm libstemmer_c.tgz
+php-config --configure-options
 WITH_FPIC=$(php-config --configure-options | grep -e --with-pic | wc -l)
 if [[ "$WITH_FPIC" == "1" ]]
 then
