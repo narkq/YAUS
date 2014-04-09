@@ -5,7 +5,7 @@
 /* list entry identifier for snowball stemmer resource */
 int le_yaus_snowball_stemmer;
 
-static function_entry yaus_functions[] = {
+zend_function_entry yaus_functions[] = {
     PHP_FE(stemword_ru, NULL)
     PHP_FE(stemword_en, NULL)
     PHP_FE(stemword_enru, NULL)
