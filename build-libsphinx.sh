@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SPHINX_VERSION=2.0.6
+SPHINX_VERSION=2.1.6
 
 wget http://sphinxsearch.com/files/sphinx-$SPHINX_VERSION-release.tar.gz
 tar zxf sphinx-$SPHINX_VERSION-release.tar.gz
