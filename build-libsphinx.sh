@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 SPHINX_VERSION=2.1.6
 
@@ -11,8 +12,8 @@ pushd libsphinx
 wget http://snowball.tartarus.org/dist/libstemmer_c.tgz
 tar zxf libstemmer_c.tgz
 rm libstemmer_c.tgz
-php-config --configure-options | grep -e --with-pic > /dev/null
-if [[ "$?" == "0" ]]
+WITH_FPIC=$(php-config --configure-options | grep -e --with-pic | wc -l)
+if [[ "$WITH_FPIC" == "1" ]]
 then
 	patch -p1 < ../patches/sphinx-$SPHINX_VERSION-fPIC.patch
 	patch -p1 < ../patches/sphinx-$SPHINX_VERSION-automake-compat.patch
