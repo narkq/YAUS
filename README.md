@@ -53,7 +53,7 @@ API is pretty old-fashioned, this may be changed in the future.
     /**
      * gets the stem of an english word using metaphone algorithm
      */
-    function stemword_dmetaphone($english_word, $is_utf8);
+    function stemword_dmetaphone($english_word);
 
     /**
      * initializes the snowball stemmer

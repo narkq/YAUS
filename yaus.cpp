@@ -175,15 +175,14 @@ PHP_FUNCTION(stemword_dmetaphone)
 	char *word;
 	char *result;
 	int wordlen;
-	bool is_utf;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sb", &word, &wordlen, &is_utf) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
 		RETURN_NULL();
 	}
 	//We need to get a copy of input parameters, because stem functions
 	//are destructive.
 	result = estrdup(word);
 
-	stem_dmetaphone((BYTE *)result, is_utf);
+	stem_dmetaphone((BYTE *)result);
 
 	Z_TYPE_P(return_value) = IS_STRING;
 	Z_STRVAL_P(return_value) = estrdup(result);
