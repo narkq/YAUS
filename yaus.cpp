@@ -85,14 +85,7 @@ PHP_FUNCTION(stemword_ru)
 	//are destructive.
 	result = yaus_estrndup_with_padding(word, wordlen);
 
-	if (!is_utf)
-	{
-		stem_ru_cp1251((BYTE *)result);
-	}
-	else
-	{
-		stem_ru_utf8((WORD *)result);
-	}
+	stem_ru_utf8((WORD *)result);
 
 	Z_TYPE_P(return_value) = IS_STRING;
 	Z_STRVAL_P(return_value) = estrdup(result);
@@ -135,15 +128,8 @@ PHP_FUNCTION(stemword_enru)
 
 	//Theoretically, the order of stemming is irrelevant.
 	stem_en((BYTE *)result, wordlen);
-	if (!is_utf)
-	{
-		stem_ru_cp1251((BYTE *)result);
-	}
-	else
-	{
-		stem_ru_utf8((WORD *)result);
-	}
-        
+	stem_ru_utf8((WORD *)result);
+
 	Z_TYPE_P(return_value) = IS_STRING;
 	Z_STRVAL_P(return_value) = estrdup(result);
 	Z_STRLEN_P(return_value) = strlen(result);

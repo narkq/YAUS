@@ -33,7 +33,7 @@ API is pretty old-fashioned, this may be changed in the future.
     /**
      * gets the stem of a russian word
      */
-    function stemword_ru($russian_word, $is_utf8);
+    function stemword_ru($russian_word);
 
     /**
      * gets the stem of an english word
@@ -43,7 +43,7 @@ API is pretty old-fashioned, this may be changed in the future.
     /**
      * gets the stem of a russian or english word
      */
-    function stemword_enru($russian_or_english_word, $is_utf8);
+    function stemword_enru($russian_or_english_word);
 
     /**
      * gets the stem of an english word using soundex algorithm
