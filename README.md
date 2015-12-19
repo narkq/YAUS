@@ -78,6 +78,14 @@ API is pretty old-fashioned, this may be changed in the future.
 
 ## CHANGELOG
 
+*	v 0.3.3
+
+	* updated libsphinx to 2.2.10
+
+	* changed `stemword_dmetaphone` to be compatible with new libsphinx
+
+	* fixed building procedure yet again
+
 *	v 0.3.2
 
 	* fixed building procedure with new automake
