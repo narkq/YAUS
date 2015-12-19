@@ -1,7 +1,7 @@
 #ifndef PHP_YAUS_H
 #define PHP_YAUS_H 1
 
-#define PHP_YAUS_VERSION "0.3.3"
+#define PHP_YAUS_VERSION "0.4.0"
 #define PHP_YAUS_EXTNAME "YAUS"
 
 #ifdef HAVE_CONFIG_H

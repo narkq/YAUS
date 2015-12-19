@@ -78,6 +78,12 @@ API is pretty old-fashioned, this may be changed in the future.
 
 ## CHANGELOG
 
+*	v 0.4.0
+
+	* built-in russian stemmer for cp1251 encoding is not supported anymore
+
+	* `$is_utf8` parameter is ignored for now
+
 *	v 0.3.3
 
 	* updated libsphinx to 2.2.10
