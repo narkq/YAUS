@@ -89,9 +89,8 @@ PHP_FUNCTION(stemword_ru)
 	char *word;
 	char *result;
 	size_t wordlen;
-	int is_utf = 0;
 	zend_string *result_str;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b", &word, &wordlen, &is_utf) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
 		RETURN_NULL();
 	}
 	//We need to get a copy of input parameters, because stem functions
@@ -130,9 +129,8 @@ PHP_FUNCTION(stemword_enru)
 	char *word;
 	char *result;
 	size_t wordlen;
-	int is_utf = 0;
 	zend_string *result_str;
-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|b", &word, &wordlen, &is_utf) == FAILURE) {
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &word, &wordlen) == FAILURE) {
 		RETURN_NULL();
 	}
 	//We need to get a copy of input parameters, because stem functions

@@ -16,7 +16,7 @@ $word_list = array_map(
 );
 foreach ($word_list as $word)
 {
-	var_dump(stemword_enru($word, true));
+	var_dump(stemword_enru($word));
 }
 ?>
 --EXPECT--

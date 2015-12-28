@@ -1,5 +1,5 @@
 --TEST--
-stemword_enru should not take non-boolean values as second parameter
+stemword_enru should not take second parameter
 --SKIPIF--
 <?php
 if (!extension_loaded("yaus"))
@@ -9,18 +9,7 @@ if (!extension_loaded("yaus"))
 --FILE--
 <?php
 var_dump(stemword_enru('stun', 0));
-var_dump(stemword_enru('stun', 1));
-var_dump(stemword_enru('stun', 'a string'));
-var_dump(stemword_enru('stun', array()));
-var_dump(stemword_enru('stun', new stdClass()));
 ?>
 --EXPECTF--
-string(4) "stun"
-string(4) "stun"
-string(4) "stun"
-
-Warning: stemword_enru() expects parameter 2 to be boolean, array given in %sstemword_enru_is_utf_parameter.php on line %d
-NULL
-
-Warning: stemword_enru() expects parameter 2 to be boolean, object given in %sstemword_enru_is_utf_parameter.php on line %d
+Warning: stemword_enru() expects exactly 1 parameter, 2 given in %sstemword_enru_is_utf_parameter.php on line %d
 NULL
