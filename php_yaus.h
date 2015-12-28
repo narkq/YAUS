@@ -28,7 +28,8 @@ typedef struct _php_yaus_snowball_stemmer {
 /// and does NOT affect strlen() as well.
 #define YAUS_STRING_SAFETY_GAP 4
 
-char *yaus_estrndup_with_padding(const char *s, uint length);
+char *yaus_estrndup_with_padding(const char *s, size_t length);
+void php_yaus_delete_snowball_stemmer_res(php_yaus_snowball_stemmer *stemmer_resource);
 
 PHP_MINIT_FUNCTION(yaus);
 PHP_MINFO_FUNCTION(yaus);
@@ -42,7 +43,7 @@ PHP_FUNCTION(stemword_snowball_stem);
 PHP_FUNCTION(stemword_snowball_algorithm_list);
 PHP_FUNCTION(stemword_snowball_delete);
 
-static void php_yaus_snowball_stemmer_dtor(zend_rsrc_list_entry *rsrc TSRMLS_DC);
+static void php_yaus_snowball_stemmer_dtor(zend_resource *rsrc TSRMLS_DC);
 
 extern zend_module_entry yaus_module_entry;
 #define phpext_yaus_ptr &yaus_module_entry
