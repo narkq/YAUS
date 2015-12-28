@@ -78,6 +78,12 @@ API is pretty old-fashioned, this may be changed in the future.
 
 ## CHANGELOG
 
+*	v 0.5.0
+
+	* this version is compatible with PHP 7 (and most likely NOT compatible with PHP 5)
+
+	* `$is_utf8` parameter is eliminated
+
 *	v 0.4.0
 
 	* built-in russian stemmer for cp1251 encoding is not supported anymore
