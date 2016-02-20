@@ -80,15 +80,19 @@ API is pretty old-fashioned, this may be changed in the future.
 
 *	v 0.5.0
 
-	* this version is compatible with PHP 7 (and most likely NOT compatible with PHP 5)
+	* PHP 7 compatible
 
 	* `$is_utf8` parameter is eliminated
+
+    * windows builds are not supported for the time being, as building sphinx 2.2.10 with VC14 requires some serious patching
 
 *	v 0.4.0
 
 	* built-in russian stemmer for cp1251 encoding is not supported anymore
 
 	* `$is_utf8` parameter is ignored for now
+
+	* this is the last version compatible with PHP 5
 
 *	v 0.3.3
 
